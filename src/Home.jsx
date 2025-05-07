@@ -7,6 +7,15 @@ import { io } from 'socket.io-client'
 import { SocketContext } from './socket-context.js'
 import Active from './Active.jsx'
 import { useParams } from 'react-router-dom'
+import {
+    Users,
+    Clock,
+    Trophy,
+    RefreshCw,
+    Book,
+    User,
+    Award,
+} from "lucide-react";
 
 
 function Home() {
@@ -63,9 +72,10 @@ function Home() {
     }
 
     return (
-        <div>
-            <div><Active /></div>
+        <div className='bg-purple-100'>
+
             <div className='flex flex-col justify-center items-center h-screen '>
+                <div><Active /></div>
                 <div><Timer
                     isTyping={isTyping}
                     complete={quote.content === type.join('')}
