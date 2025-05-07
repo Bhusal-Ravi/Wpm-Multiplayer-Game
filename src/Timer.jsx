@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState, useEffect } from 'react'
+import { SocketContext } from './socket-context'
 
 function Timer({ isTyping, complete, onComplete }) {
   const [minute, setMinute] = useState(0)
   const [second, setSecond] = useState(59)
   const [button, setButton] = useState(0)
   const [timerComplete, setTimerComplete] = useState(false)
+  const socket = useContext(SocketContext)
   useEffect(() => {
     let intervalId = null;
     if ((button === 1 || isTyping) && !complete) {
@@ -26,8 +28,16 @@ function Timer({ isTyping, complete, onComplete }) {
         }
       }, 1000)
     }
+    function handleReset() {
+      setMinute(0);
+      setSecond(59);
+      setButton(0);
+      setTimerComplete(false);
+    }
+    socket.on('statsReset', handleReset)
     return () => {
       if (intervalId) clearInterval(intervalId);
+      socket.off('statsReset', handleReset);
     };
   }, [button, minute, second, isTyping, complete]);
 

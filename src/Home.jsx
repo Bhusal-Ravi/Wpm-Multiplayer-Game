@@ -12,6 +12,7 @@ import { useParams } from 'react-router-dom'
 function Home() {
     const [quote, setQuote] = useState({ content: '' })
     const [type, setType] = useState([])
+    const [input, setInput] = useState([])
     const [isTyping, setIsTyping] = useState(false)
     const [timerComplete, setTimerComplete] = useState(false)
 
@@ -29,8 +30,16 @@ function Home() {
         })
         socket.emit('getQuote', roomName)
 
+        function handleReset() {
+            setIsTyping(false)
+            setType([])
+            setTimerComplete(false);
+        }
+        socket.on('statsReset', handleReset)
+
         return () => {
             socket.off('currentQuote')
+            socket.off('statsReset')
         }
     }, [roomName]);
 
@@ -43,9 +52,11 @@ function Home() {
 
     function handleQuoteChange() {
         socket.emit('changeQuote', roomName);
+        setInput([])
     }
 
     function typingChange(event) {
+        setInput(event.target.value)
         const typedText = event.target.value.split('')
         setType(typedText)
         setIsTyping(true)
@@ -78,7 +89,7 @@ function Home() {
                 </div>
                 <div>
                     <textarea onPaste={(e) => e.preventDefault()}
-                        onContextMenu={(e) => e.preventDefault()} disabled={(type.join('') === quote.content) || timerComplete} className="resize rounded-md border p-5 w-full mx-auto max-w-xl" onChange={typingChange}></textarea>
+                        onContextMenu={(e) => e.preventDefault()} disabled={(type.join('') === quote.content) || timerComplete} className="resize rounded-md border p-5 w-full mx-auto max-w-xl" value={input} onChange={typingChange}></textarea>
                 </div>
                 <div>
                     <button className='m-2 bg-green-400 rounded-md py-1 px-4 hover:scale-105 transition-transform duration-200' onClick={handleQuoteChange} >Change Quote</button>

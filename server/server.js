@@ -109,7 +109,9 @@ io.on('connection',(socket)=>{
     socket.on('changeQuote', async(roomName)=>{
         const quote= await Quote();
         rooms[roomName].quote=quote[0];
-        io.emit('currentQuote',rooms[roomName].quote)
+        io.to(roomName).emit('statsReset');
+        io.to(roomName).emit('currentQuote',rooms[roomName].quote)
+        
 
             
         

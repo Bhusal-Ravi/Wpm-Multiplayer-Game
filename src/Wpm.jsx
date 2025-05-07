@@ -11,6 +11,7 @@ function Wpm({ quote, typedText, isTyping }) {
 
     const [startTime, setStartTime] = useState(null);
     const [wpm, setWpm] = useState(0);
+    const [intervalId, setIntervalId] = useState(null);
 
 
 
@@ -18,11 +19,31 @@ function Wpm({ quote, typedText, isTyping }) {
         if (isTyping && !startTime && typedText.length > 0) {
             setStartTime(Date.now())
         }
-    }, [isTyping, startTime, typedText]);
+        function handleReset() {
+            setWpm(0)
+            setStartTime(null);
+
+            if (intervalId) {
+                clearInterval(intervalId);
+                setIntervalId(null);
+            }
+            socket.emit('wpm', 0);
+        }
+        socket.on('statsReset', handleReset)
+
+        return () => {
+            socket.off('statsReset', handleReset);
+        };
+    }, [isTyping, startTime, typedText, socket, intervalId]);
 
     useEffect(() => {
         if (!startTime || typedText.length === 0) return
-        const interval = setInterval(calculateWpm, 500);
+
+        if (intervalId) {
+            clearInterval(intervalId);
+        }
+        const newInterval = setInterval(calculateWpm, 500);
+        setIntervalId(newInterval);
 
 
 
@@ -40,7 +61,7 @@ function Wpm({ quote, typedText, isTyping }) {
             setWpm(currentWpm || 0)
             socket.emit('wpm', currentWpm);
             if (correctChar === quote.length) {
-                clearInterval(interval)
+                clearInterval(newInterval)
             }
         }
         calculateWpm();
@@ -49,8 +70,10 @@ function Wpm({ quote, typedText, isTyping }) {
 
 
 
-        return () => clearInterval(interval);
-    }, [typedText, quote, startTime]);
+        return () => {
+            if (newInterval) clearInterval(newInterval);
+        };
+    }, [typedText, quote, startTime, socket]);
     return (
 
         <div>Wpm:{wpm}</div>
