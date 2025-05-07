@@ -1,12 +1,3 @@
-# React + Vite
+# Typing Speed Race - A Multiplayer Challenge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Typing Speed Race is an engaging multiplayer typing game that lets friends and colleagues compete in real-time to see who can type the fastest. Players join custom rooms where they race to accurately type the same quote, with live stats showing words-per-minute and accuracy metrics. The game features a clean, minimalist interface that helps players focus on improving their typing skills while competing against others. Currently a work in progress, this game already includes core functionality like multiplayer rooms, real-time performance tracking, and synchronized quotes across players. Future updates will include leaderboards, additional game modes, and performance analytics to help players track their improvement over time. Whether you're looking to improve your typing skills or just enjoy some friendly competition, Typing Speed Race offers a fun and practical multiplayer experience.
