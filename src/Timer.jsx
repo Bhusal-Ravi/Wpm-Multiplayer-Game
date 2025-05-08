@@ -48,11 +48,12 @@ function Timer({ isTyping, complete, onComplete }) {
 
 
     <div className='flex justify-center items-center'>
-      <div className='m-5'>
+      <div className='mx-5 my-2 bg-indigo-500 text-white font-bold rounded-xl px-4
+       py-1 ml-2'>
         {minute}:{second}
       </div>
       <div>
-        <button className={`m-2 bg-green-400 rounded-md py-1 px-4 hover:scale-105 transition-transform duration-200 ${button === 1 ? "hidden" : ""} `} onClick={toggleButton}>Start</button>
+        <button className={`mx-4 font-bold text-white  bg-green-600 rounded-md py-1 px-4 hover:scale-105 transition-transform duration-200 ${button === 1 ? "hidden" : ""} `} onClick={toggleButton}>Start</button>
       </div>
     </div>
   )

@@ -76,7 +76,8 @@ function Wpm({ quote, typedText, isTyping }) {
     }, [typedText, quote, startTime, socket]);
     return (
 
-        <div>Wpm:{wpm}</div>
+        <div className='mx-5 my-2 bg-indigo-500 text-white font-bold rounded-xl px-12
+        py-1 ml-2'>{wpm} WPM</div>
     )
 }
 
