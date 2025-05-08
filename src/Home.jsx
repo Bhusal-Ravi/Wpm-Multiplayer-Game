@@ -67,7 +67,7 @@ function Home() {
     }
 
     function typingChange(event) {
-        setInput(event.target.value)
+        const value = event.target.value
         const typedText = event.target.value.split('')
         setType(typedText)
         setIsTyping(true)
@@ -150,7 +150,7 @@ function Home() {
                 </div>
                 <div className="w-full mx-auto max-w-xl">
                     <textarea
-                      
+
                         onPaste={(e) => e.preventDefault()}
                         onContextMenu={(e) => e.preventDefault()}
                         disabled={(type.join('') === quote.content) || timerComplete}
