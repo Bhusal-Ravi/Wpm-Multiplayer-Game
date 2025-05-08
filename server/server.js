@@ -8,7 +8,6 @@ const PORT = process.env.PORT || 3000;
 const users={};
 const rooms={};
 
-
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
     cors: {
@@ -42,14 +41,18 @@ app.get('/quote', async (req, res) => {
     res.json(quote);
 });
 
-function getPlayersList() {
-    return Object.values(users).filter(user => user.name).map(user => ({
-        id: user.id,
-        name: user.name,
-        room: user.room,
-        wpm: user.wpm || 0
-    }));
+
+function getPlayersListByRoom(roomName) {
+    return Object.values(users)
+        .filter(user => user.name && user.room === roomName)
+        .map(user => ({
+            id: user.id,
+            name: user.name,
+            room: user.room,
+            wpm: user.wpm || 0
+        }));
 }
+
 io.on('connection',(socket)=>{
     console.log(`User Connected: ${socket.id}`)
 
@@ -59,6 +62,7 @@ io.on('connection',(socket)=>{
         room:null,
         wpm: null
     }
+    
     socket.on('newPlayer', async (player)=>{
         users[socket.id].name=player.name
         users[socket.id].room=player.room
@@ -78,62 +82,67 @@ io.on('connection',(socket)=>{
 
         socket.join(player.room)
 
-        const playersList= Object.values(users).filter(user => user.name).map(user=>({
-            id:user.id,
-            name:user.name,
-            room:user.room
-        }))
-        io.to(users[socket.id].room).emit('players',playersList);
-        io.to(users[socket.id].room).emit('players', getPlayersList());
+       
+        const roomPlayers = getPlayersListByRoom(player.room);
+        io.to(player.room).emit('players', roomPlayers);
 
-        socket.emit('currentQuote',rooms[player.room].quote);
+        socket.emit('currentQuote', rooms[player.room].quote);
     })
+    
     socket.on('disconnect', ()=>{
         console.log(`User Disconnected: ${socket.id}`)
-        delete users[socket.id]
-        const playersList= Object.values(users).filter(user => user.name).map(user=>({
-            id:user.id,
-            name:user.name,
-            room:user.room
-        }))
-        io.emit('players',playersList)
+        const userRoom = users[socket.id]?.room;
+        
+        
+        if (userRoom && rooms[userRoom]) {
+            rooms[userRoom].players = rooms[userRoom].players.filter(
+                player => player.id !== socket.id
+            );
+            
+            
+            if (rooms[userRoom].players.length === 0) {
+                delete rooms[userRoom];
+            } else {
+               
+                io.to(userRoom).emit('players', getPlayersListByRoom(userRoom));
+            }
+        }
+        
+        delete users[socket.id];
     })
+    
     socket.on('getPlayers', (roomName) => {
-        const playersList = Object.values(users).filter(user => user.name).map(user => ({
-            id: user.id,
-            name: user.name,
-            room: user.room,
-            wpm: user.wpm,
-        }));
-        socket.to(roomName).emit('players', playersList); 
+        if (roomName) {
+            const roomPlayers = getPlayersListByRoom(roomName);
+            socket.emit('players', roomPlayers);
+        }
     });
 
     socket.on('changeQuote', async(roomName)=>{
-        const quote= await Quote();
-        rooms[roomName].quote=quote[0];
+        if (!roomName || !rooms[roomName]) return;
+        
+        const quote = await Quote();
+        rooms[roomName].quote = quote[0];
         io.to(roomName).emit('statsReset');
-        io.to(roomName).emit('currentQuote',rooms[roomName].quote)
-        
-
-            
-        
+        io.to(roomName).emit('currentQuote', rooms[roomName].quote);
     })
 
-    socket.on('getQuote',(roomName)=>{
-        socket.emit('currentQuote',rooms[roomName]?.quote)
+    socket.on('getQuote', (roomName)=>{
+        if (roomName && rooms[roomName]) {
+            socket.emit('currentQuote', rooms[roomName].quote);
+        }
     })
     
-    socket.on('wpm',(wpm)=>{
-        users[socket.id].wpm=wpm
-
-        io.emit('players',getPlayersList());
+    socket.on('wpm', (wpm)=>{
+        const userRoom = users[socket.id]?.room;
+        if (!userRoom) return;
         
-    })
+        users[socket.id].wpm = wpm;
+        
   
-    
+        io.to(userRoom).emit('players', getPlayersListByRoom(userRoom));
+    })
 })
-
-
 
 httpServer.listen(PORT, () => {
     console.log(`Server is running on Port:${PORT}`);
