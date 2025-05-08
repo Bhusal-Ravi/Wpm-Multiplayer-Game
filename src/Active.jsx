@@ -3,7 +3,7 @@ import { SocketContext } from './socket-context'
 import { User } from 'lucide-react'
 
 
-function Active() {
+function Active({ roomName }) {
     const socket = useContext(SocketContext)
     const [active, setActive] = useState([])
     const [userId, setUserId] = useState(socket.id)
@@ -21,7 +21,7 @@ function Active() {
 
         socket.on('players', handlePlayersList);
 
-        socket.emit('getPlayers')
+        socket.emit('getPlayers', roomName)
 
 
         return () => {

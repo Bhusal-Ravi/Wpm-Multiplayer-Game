@@ -87,7 +87,11 @@ function Home() {
                 </div>
             </div>
             <div className='flex flex-col mt-5  items-center h-screen '>
-                <div className='w-full mx-auto max-w-xl'><Active /></div>
+                <div className='w-full mx-auto max-w-xl'>
+                    <Active
+                        roomName={roomName}
+                    />
+                </div>
                 <div className=' shadow-lg grid grid-flow-row grid-cols-1    bg-white p-4 rounded-xl w-full mx-auto max-w-xl mb-5 mt-1'>
                     <div className='content-start flex flex-row text-indigo-600'>
                         <ChartNoAxesCombined size={20} className='mr-2 font-thin' />

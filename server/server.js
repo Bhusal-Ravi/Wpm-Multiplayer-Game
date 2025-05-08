@@ -98,14 +98,14 @@ io.on('connection',(socket)=>{
         }))
         io.emit('players',playersList)
     })
-    socket.on('getPlayers', () => {
+    socket.on('getPlayers', (roomName) => {
         const playersList = Object.values(users).filter(user => user.name).map(user => ({
             id: user.id,
             name: user.name,
             room: user.room,
             wpm: user.wpm,
         }));
-        socket.emit('players', playersList); 
+        socket.to(roomName).emit('players', playersList); 
     });
 
     socket.on('changeQuote', async(roomName)=>{
