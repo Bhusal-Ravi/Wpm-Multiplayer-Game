@@ -67,7 +67,7 @@ function Home() {
     }
 
     function typingChange(event) {
-        setInput(event.target.value)
+        const value = event.target.value
         const typedText = event.target.value.split('')
         setType(typedText)
         setIsTyping(true)
