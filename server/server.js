@@ -83,8 +83,8 @@ io.on('connection',(socket)=>{
             name:user.name,
             room:user.room
         }))
-        io.emit('players',playersList);
-        io.emit('players', getPlayersList());
+        io.to(users[socket.id].room).emit('players',playersList);
+        io.to(users[socket.id].room).emit('players', getPlayersList());
 
         socket.emit('currentQuote',rooms[player.room].quote);
     })
