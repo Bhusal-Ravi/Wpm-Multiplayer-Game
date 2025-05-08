@@ -12,13 +12,13 @@ const rooms={};
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
     cors: {
-        origin: ['https://wpm-multiplayer-game.vercel.app/'],
+        origin: ['https://wpm-multiplayer-game.vercel.app'],
         methods: ['GET', 'POST'],
     },
 });
 
 app.use(cors({
-    origin: ['https://wpm-multiplayer-game.vercel.app/']
+    origin: ['https://wpm-multiplayer-game.vercel.app']
 }));
 app.use(express.json());
 
