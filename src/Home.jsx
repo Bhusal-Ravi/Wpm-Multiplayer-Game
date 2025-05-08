@@ -22,8 +22,8 @@ import {
 function Home() {
     const [quote, setQuote] = useState({ content: '' })
     const [type, setType] = useState([])
-    const [input, setInput] = useState([])
     const [isTyping, setIsTyping] = useState(false)
+    const [inputValue, setInputValue] = useState('')
     const [timerComplete, setTimerComplete] = useState(false)
 
 
@@ -37,6 +37,7 @@ function Home() {
             setQuote(newQuote);
             setType([])
             setIsTyping(false)
+            setInputValue('')
         })
         socket.emit('getQuote', roomName)
 
@@ -70,6 +71,7 @@ function Home() {
         const typedText = event.target.value.split('')
         setType(typedText)
         setIsTyping(true)
+        setInputValue(value)
     }
 
     return (
@@ -148,12 +150,13 @@ function Home() {
                 </div>
                 <div className="w-full mx-auto max-w-xl">
                     <textarea
+
                         onPaste={(e) => e.preventDefault()}
                         onContextMenu={(e) => e.preventDefault()}
                         disabled={(type.join('') === quote.content) || timerComplete}
                         className="w-full h-28 mt-5 bg-white shadow-lg p-4 border-2 border-indigo-200 rounded-xl focus:ring-2 focus:ring-indigo-300 focus:border-indigo-500 outline-none transition resize-none"
                         placeholder="Start typing here..."
-                        value={input}
+                        value={inputValue}
                         onChange={typingChange}>
                     </textarea>
                 </div>
