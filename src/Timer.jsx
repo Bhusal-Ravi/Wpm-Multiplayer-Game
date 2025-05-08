@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState, useEffect } from 'react'
+import { SocketContext } from './socket-context'
 
 function Timer({ isTyping, complete, onComplete }) {
   const [minute, setMinute] = useState(0)
   const [second, setSecond] = useState(59)
   const [button, setButton] = useState(0)
   const [timerComplete, setTimerComplete] = useState(false)
+  const socket = useContext(SocketContext)
   useEffect(() => {
     let intervalId = null;
     if ((button === 1 || isTyping) && !complete) {
@@ -26,8 +28,16 @@ function Timer({ isTyping, complete, onComplete }) {
         }
       }, 1000)
     }
+    function handleReset() {
+      setMinute(0);
+      setSecond(59);
+      setButton(0);
+      setTimerComplete(false);
+    }
+    socket.on('statsReset', handleReset)
     return () => {
       if (intervalId) clearInterval(intervalId);
+      socket.off('statsReset', handleReset);
     };
   }, [button, minute, second, isTyping, complete]);
 
@@ -38,11 +48,12 @@ function Timer({ isTyping, complete, onComplete }) {
 
 
     <div className='flex justify-center items-center'>
-      <div className='m-5'>
+      <div className='mx-5 my-2 bg-indigo-500 text-white font-bold rounded-xl px-4
+       py-1 ml-2'>
         {minute}:{second}
       </div>
       <div>
-        <button className={`m-2 bg-green-400 rounded-md py-1 px-4 hover:scale-105 transition-transform duration-200 ${button === 1 ? "hidden" : ""} `} onClick={toggleButton}>Start</button>
+        <button className={`mx-4 font-bold text-white  bg-green-600 rounded-md py-1 px-4 hover:scale-105 transition-transform duration-200 ${button === 1 ? "hidden" : ""} `} onClick={toggleButton}>Start</button>
       </div>
     </div>
   )

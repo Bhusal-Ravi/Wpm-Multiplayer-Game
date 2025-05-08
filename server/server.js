@@ -4,7 +4,7 @@ import {createServer} from 'http';
 import {Server} from 'socket.io';
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const users={};
 const rooms={};
 
@@ -12,12 +12,14 @@ const rooms={};
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
     cors: {
-        origin: 'http://localhost:5173',
+        origin: ['https://wpm-multiplayer-game.vercel.app'],
         methods: ['GET', 'POST'],
     },
 });
 
-app.use(cors());
+app.use(cors({
+    origin: ['https://wpm-multiplayer-game.vercel.app']
+}));
 app.use(express.json());
 
 export async function Quote() {
@@ -109,7 +111,9 @@ io.on('connection',(socket)=>{
     socket.on('changeQuote', async(roomName)=>{
         const quote= await Quote();
         rooms[roomName].quote=quote[0];
-        io.emit('currentQuote',rooms[roomName].quote)
+        io.to(roomName).emit('statsReset');
+        io.to(roomName).emit('currentQuote',rooms[roomName].quote)
+        
 
             
         
@@ -132,5 +136,5 @@ io.on('connection',(socket)=>{
 
 
 httpServer.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server is running on Port:${PORT}`);
 });
