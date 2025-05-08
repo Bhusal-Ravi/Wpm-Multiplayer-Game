@@ -4,7 +4,7 @@ import {createServer} from 'http';
 import {Server} from 'socket.io';
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const users={};
 const rooms={};
 
@@ -12,12 +12,14 @@ const rooms={};
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
     cors: {
-        origin: 'http://localhost:5173',
+        origin: ['http://localhost:5173', 'https://your-vercel-app.vercel.app'],
         methods: ['GET', 'POST'],
     },
 });
 
-app.use(cors());
+app.use(cors({
+    origin: ['http://localhost:5173', 'https://your-vercel-app.vercel.app']
+}));
 app.use(express.json());
 
 export async function Quote() {
