@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { SocketContext, socket } from './socket-context';
-import ParticleBackground from './components/Particles'; // adjust path if different
+import ParticleBackground from './Particle';
 
 function App() {
   return (
