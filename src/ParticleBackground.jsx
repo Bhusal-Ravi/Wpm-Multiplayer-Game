@@ -17,11 +17,11 @@ export default function ParticleBackground() {
                 options={{
                     background: {
                         color: {
-                            value: "#000000",
+                            value: "#000010",
                         },
                     },
                     fullScreen: {
-                        enable: false, // Changed to false to prevent fullscreen behavior
+                        enable: false,
                         zIndex: -1,
                     },
                     particles: {

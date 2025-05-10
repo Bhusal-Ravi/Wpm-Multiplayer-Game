@@ -21,7 +21,7 @@ const Detail = () => {
     };
 
     return (
-        <div className="bg-purple-100 min-h-screen flex flex-col">
+        <div className="min-h-screen flex flex-col">
             <div className='w-full flex justify-between bg-white h-15 items-center shadow-md px-10 py-3'>
                 <div className='flex flex-row items-center'>
                     <Keyboard size={40} className='text-indigo-600 mr-3' />
