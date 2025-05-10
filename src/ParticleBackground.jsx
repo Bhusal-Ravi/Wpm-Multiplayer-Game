@@ -9,43 +9,46 @@ export default function ParticleBackground() {
     }, []);
 
     return (
-        <Particles
-            id="tsparticles"
-            init={particlesInit}
-            options={{
-                background: {
-                    color: {
-                        value: "#000000",
+        <div className="fixed inset-0 z-[-1] overflow-hidden">
+            <Particles
+                id="tsparticles"
+                className="absolute inset-0"
+                init={particlesInit}
+                options={{
+                    background: {
+                        color: {
+                            value: "#000000",
+                        },
                     },
-                },
-                fullScreen: {
-                    enable: true,
-                    zIndex: -1,
-                },
-                particles: {
-                    number: {
-                        value: 100,
+                    fullScreen: {
+                        enable: false, // Changed to false to prevent fullscreen behavior
+                        zIndex: -1,
                     },
-                    color: {
-                        value: "#ffffff",
+                    particles: {
+                        number: {
+                            value: 100,
+                        },
+                        color: {
+                            value: "#ffffff",
+                        },
+                        size: {
+                            value: 2,
+                        },
+                        move: {
+                            enable: true,
+                            speed: 1,
+                        },
+                        links: {
+                            enable: true,
+                            distance: 150,
+                            color: "#ffffff",
+                            opacity: 0.4,
+                            width: 1
+                        },
                     },
-                    size: {
-                        value: 2,
-                    },
-                    move: {
-                        enable: true,
-                        speed: 1,
-                    },
-                    links: {
-                        enable: true,
-                        distance: 150,
-                        color: "#ffffff",
-                        opacity: 0.4,
-                        width: 1
-                    },
-                },
-                detectRetina: true,
-            }}
-        />
-    );
+                    detectRetina: true,
+                }}
+            />
+        </div>
+    )
 }
