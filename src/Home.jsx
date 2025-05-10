@@ -75,7 +75,7 @@ function Home() {
     }
 
     return (
-        <div className='bg-purple-100'>
+        <div className=''>
             <div className='w-full flex justify-between  bg-white h-15 flex items-center shadow-md'>
                 <div className=' flex flex-row ml-25'>
                     <Keyboard size={40} className='text-indigo-600 mr-3' />
