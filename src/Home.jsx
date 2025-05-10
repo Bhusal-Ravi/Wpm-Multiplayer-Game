@@ -158,7 +158,7 @@ function Home() {
                         onPaste={(e) => e.preventDefault()}
                         onContextMenu={(e) => e.preventDefault()}
                         disabled={(type.join('') === quote.content) || timerComplete}
-                        className="w-full h-28 mt-5  shadow-lg p-4 border-2 border-indigo-200 rounded-xl focus:ring-2 focus:ring-indigo-300 focus:border-indigo-500 outline-none transition resize-none"
+                        className="w-full h-28 mt-5 bg-white  shadow-lg p-4 border-2 border-indigo-200 rounded-xl focus:ring-2 focus:ring-indigo-300 focus:border-indigo-500 outline-none transition resize-none"
                         placeholder="Start typing here..."
                         value={inputValue}
                         onChange={typingChange}>
