@@ -5,9 +5,9 @@ import ParticleBackground from './ParticleBackground';
 function App() {
   return (
     <SocketContext.Provider value={socket}>
-      <div className="h-full w-full relative overflow-hidden">
+      <div className="h-screen w-full relative overflow-hidden bg-transparent">
         <ParticleBackground />
-        <div className="relative z-10 h-full">
+        <div className="relative z-10 h-full w-full">
           <Outlet />
         </div>
       </div>

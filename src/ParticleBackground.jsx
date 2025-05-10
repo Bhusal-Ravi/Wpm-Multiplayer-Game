@@ -9,10 +9,10 @@ export default function ParticleBackground() {
     }, []);
 
     return (
-        <div className="fixed inset-0 z-[-1] overflow-hidden">
+        <div className="absolute inset-0 h-full w-full">
             <Particles
                 id="tsparticles"
-                className="absolute inset-0"
+                className="absolute inset-0 h-full w-full"
                 init={particlesInit}
                 options={{
                     background: {
@@ -21,7 +21,7 @@ export default function ParticleBackground() {
                         },
                     },
                     fullScreen: {
-                        enable: false,
+                        enable: true,
                         zIndex: -1,
                     },
                     particles: {
@@ -50,5 +50,5 @@ export default function ParticleBackground() {
                 }}
             />
         </div>
-    )
+    );
 }
