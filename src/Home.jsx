@@ -92,7 +92,7 @@ function Home() {
                         roomName={roomName}
                     />
                 </div>
-                <div className=' shadow-lg grid grid-flow-row grid-cols-1     p-4 rounded-xl w-full mx-auto max-w-xl mb-5 mt-1'>
+                <div className=' shadow-lg grid grid-flow-row grid-cols-1 bg-white     p-4 rounded-xl w-full mx-auto max-w-xl mb-5 mt-1'>
                     <div className='content-start flex flex-row text-indigo-600'>
                         <ChartNoAxesCombined size={20} className='mr-2 font-thin' />
                         <h1 className=' text-lg font-bold'>Stats</h1>
@@ -131,7 +131,7 @@ function Home() {
                 </div>
 
 
-                <div className=' w-full mx-auto max-w-xl rounded-xl  p-3 '>
+                <div className=' w-full mx-auto max-w-xl bg-white rounded-xl  p-3 '>
                     <div className='flex flex-row'>
                         <div className='flex flex-row items-center text-indigo-600'>
                             <Quote className='mr-2 font-thin' size={20} />
