@@ -1,6 +1,6 @@
 // src/TestParticles.jsx
 import React from 'react';
-import ParticleBackground from './components/ParticleBackground';
+import ParticleBackground from './ParticleBackground';
 
 export default function TestParticles() {
     return (
