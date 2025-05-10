@@ -1,18 +1,12 @@
-import { Outlet } from 'react-router-dom';
-import { SocketContext, socket } from './socket-context';
-import ParticleBackground from './ParticleBackground';
+import TestParticles from './TestParticles';
 
 function App() {
   return (
     <SocketContext.Provider value={socket}>
-      <div className="h-screen w-full relative overflow-hidden bg-transparent">
-        <ParticleBackground />
-        <div className="relative z-10 h-full w-full">
-          <Outlet />
-        </div>
+      <ParticleBackground />
+      <div className="relative z-10">
+        <TestParticles />
       </div>
     </SocketContext.Provider>
   );
 }
-
-export default App;
