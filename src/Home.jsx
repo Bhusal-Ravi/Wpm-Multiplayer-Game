@@ -76,7 +76,7 @@ function Home() {
 
     return (
         <div className=''>
-            <div className='w-full flex justify-between   h-15 flex items-center shadow-md'>
+            <div className='w-full flex justify-between bg-white  h-15 flex items-center shadow-md'>
                 <div className=' flex flex-row ml-25'>
                     <Keyboard size={40} className='text-indigo-600 mr-3' />
                     <h1 className='font-bold   text-xl'>Type<span className='text-indigo-600'>Racer</span></h1>
