@@ -76,7 +76,7 @@ function Home() {
 
     return (
         <div className=''>
-            <div className='w-full flex justify-between  bg-white h-15 flex items-center shadow-md'>
+            <div className='w-full flex justify-between   h-15 flex items-center shadow-md'>
                 <div className=' flex flex-row ml-25'>
                     <Keyboard size={40} className='text-indigo-600 mr-3' />
                     <h1 className='font-bold   text-xl'>Type<span className='text-indigo-600'>Racer</span></h1>
@@ -92,7 +92,7 @@ function Home() {
                         roomName={roomName}
                     />
                 </div>
-                <div className=' shadow-lg grid grid-flow-row grid-cols-1    bg-white p-4 rounded-xl w-full mx-auto max-w-xl mb-5 mt-1'>
+                <div className=' shadow-lg grid grid-flow-row grid-cols-1     p-4 rounded-xl w-full mx-auto max-w-xl mb-5 mt-1'>
                     <div className='content-start flex flex-row text-indigo-600'>
                         <ChartNoAxesCombined size={20} className='mr-2 font-thin' />
                         <h1 className=' text-lg font-bold'>Stats</h1>
@@ -131,7 +131,7 @@ function Home() {
                 </div>
 
 
-                <div className=' w-full mx-auto max-w-xl rounded-xl  p-3 bg-white'>
+                <div className=' w-full mx-auto max-w-xl rounded-xl  p-3 '>
                     <div className='flex flex-row'>
                         <div className='flex flex-row items-center text-indigo-600'>
                             <Quote className='mr-2 font-thin' size={20} />
@@ -158,7 +158,7 @@ function Home() {
                         onPaste={(e) => e.preventDefault()}
                         onContextMenu={(e) => e.preventDefault()}
                         disabled={(type.join('') === quote.content) || timerComplete}
-                        className="w-full h-28 mt-5 bg-white shadow-lg p-4 border-2 border-indigo-200 rounded-xl focus:ring-2 focus:ring-indigo-300 focus:border-indigo-500 outline-none transition resize-none"
+                        className="w-full h-28 mt-5  shadow-lg p-4 border-2 border-indigo-200 rounded-xl focus:ring-2 focus:ring-indigo-300 focus:border-indigo-500 outline-none transition resize-none"
                         placeholder="Start typing here..."
                         value={inputValue}
                         onChange={typingChange}>
