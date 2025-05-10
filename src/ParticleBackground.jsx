@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useCallback } from "react";
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 
-export default function ParticlesBackground() {
-    const particlesInit = async (main) => {
-        await loadFull(main);
-    };
+export default function ParticleBackground() {
+    const particlesInit = useCallback(async (engine) => {
+        // This adds the bundle to the main package
+        await loadFull(engine);
+    }, []);
 
     return (
         <Particles
@@ -14,12 +15,12 @@ export default function ParticlesBackground() {
             options={{
                 background: {
                     color: {
-                        value: "#000000", // dark background
+                        value: "#000000",
                     },
                 },
                 fullScreen: {
                     enable: true,
-                    zIndex: -1, // place behind everything
+                    zIndex: -1,
                 },
                 particles: {
                     number: {
@@ -35,7 +36,15 @@ export default function ParticlesBackground() {
                         enable: true,
                         speed: 1,
                     },
+                    links: {
+                        enable: true,
+                        distance: 150,
+                        color: "#ffffff",
+                        opacity: 0.4,
+                        width: 1
+                    },
                 },
+                detectRetina: true,
             }}
         />
     );

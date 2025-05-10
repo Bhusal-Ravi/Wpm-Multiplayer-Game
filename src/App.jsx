@@ -1,12 +1,12 @@
 import { Outlet } from 'react-router-dom';
 import { SocketContext, socket } from './socket-context';
-import ParticleBackground from './Particle';
+import ParticleBackground from './ParticleBackground';
 
 function App() {
   return (
     <SocketContext.Provider value={socket}>
       <ParticleBackground />
-      <div style={{ position: "relative", zIndex: 1 }}>
+      <div className="relative z-10">
         <Outlet />
       </div>
     </SocketContext.Provider>
