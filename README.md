@@ -1,54 +1,89 @@
-# Typing Speed Race - A Multiplayer Challenge
-![image](https://github.com/user-attachments/assets/818c4b15-fb3e-4ca6-abca-c635c9e84eb2)
 
+# Typing Speed Race - A Multiplayer Challenge
 
 Typing Speed Race is a real-time multiplayer typing game where players compete in custom rooms by typing the same quote. The game tracks each player’s speed (WPM) and shows live rankings. Features include synchronized quotes, a countdown timer, and a clean UI for focused typing. Future updates will add leaderboards, new game modes, and performance analytics.
 
+## Installation
 
-🔧 How It Works
-✅ Join or Create a Room
-Players enter their name and a room ID on the landing screen.
+Install Wpm-Game with npm
 
-If the entered room ID exists, the player joins the existing room.
+```bash
+On the root of the folders
 
-If the room ID doesn't exist, a new room is automatically created.
+Run: cd src 
+     npm install
 
-<br />
-🧍‍♂️ Lobby System
-Once in the room, players wait in the lobby until at least two participants have joined.
+     cd backend
+     npm install
 
-When the game starts, all players receive the same typing prompt.
+     cd src
+     npm run dev
 
-<br />
-⌨️ Typing Race
-Players race to type the given passage as fast and accurately as they can.
+     cd backend
+     npm run dev
+```
+    
+## Deployment
 
-Input is monitored in real time, showing progress and accuracy.
+To deploy this project run
 
-Mistyped characters are highlighted to encourage correction before continuing.
+```bash
+  npm run dev
+```
 
-<br />
-🔄 Real-time Multiplayer via WebSockets
-Uses Socket.IO for low-latency communication between clients and server.
 
-Player progress, room status, and quote synchronization are updated live.
+## Screenshots
 
-<br />
-🏁 Game End and Results
-The game ends when the first player finishes the passage.
+![image](https://github.com/user-attachments/assets/818c4b15-fb3e-4ca6-abca-c635c9e84eb2)
 
-All participants see final results including WPM and accuracy.
 
-Players can restart the game or join a different room.
+## How It Works
+```
+🎮 How to Play
+1. Enter Player Details
+Input your name and a room ID.
 
-<br />
-✨ Features
-🚀 Real-time multiplayer experience
+Room ID allows multiple players to join the same room.
 
-🏷️ Auto room creation and validation
+2. Join or Create a Room
+If a room with the ID exists, you join it.
 
-✍️ Live input tracking and typo highlighting
+If it doesn’t exist, a new room is created.
 
-🥇 Leaderboard display after race completion
+3. Wait or Start
+Wait for others to join, or play solo.
 
-🎨 Clean and responsive UI with Tailwind CSS
+Click "Start" to begin the game.
+
+Alternatively, start typing — this will also start your personal countdown timer.
+
+4. Start Typing!
+Each player has their own timer (not linked to others).
+
+The timer counts down (e.g., 60 seconds).
+
+Your WPM is calculated and broadcast in real-time.
+
+5. Real-time Leaderboard
+As you and others type, your WPM scores update on the leaderboard.
+
+Compete to see who types fastest!
+
+6. Game Over
+When your timer reaches zero:
+
+The input becomes uneditable.
+
+The leaderboard shows final scores.
+```
+
+
+## Authors
+
+- [@bhusal-ravi](https://github.com/Bhusal-Ravi)
+
+
+
+
+
+
