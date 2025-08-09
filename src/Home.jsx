@@ -131,7 +131,7 @@ function Home() {
                         </div>
                     </div>
                     <div className='shadow-md shadow-indigo-500/50 p-2 mx-4 my-2 mb-3 rounded-xl bg-blue-50 font-semibold text-md'>
-                        {quote.content && quote.content.split('').map((letter, index) => {
+                        {quote.content ? ( quote.content.split('').map((letter, index) => {
                             const typedChar = type[index]
                             const isCorrect = typedChar === letter;
                             const isIncorrect = typedChar !== undefined && typedChar !== letter
@@ -139,7 +139,7 @@ function Home() {
                                 className={`${isCorrect ? "text-green-600" : ""} ${isIncorrect ? "text-red-600" : ""}`}
                                 key={index}
                             >{letter}</span>
-                        })}
+                        })):(<h1>The Backend Is Starting Please Wait</h1>)}
                     </div>
                 </div>
 
